@@ -9,8 +9,8 @@ using Shopping.Models;
 namespace Shopping.Migrations
 {
     [DbContext(typeof(shopContext))]
-    [Migration("20220714060425_mig2")]
-    partial class mig2
+    [Migration("20220714074659_mig3")]
+    partial class mig3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

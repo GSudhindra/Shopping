@@ -18,8 +18,7 @@ namespace Shopping.Models
         [DataType(DataType.Currency)]
         public float Price { get; set; }
         [Display(Name ="Product Image")]
-
-        public string Pimage { get; set; }
+        public string Pimage { get; set; } // newly added column
         public virtual Seller Seller_idNavigation { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
  

@@ -2,7 +2,7 @@
 
 namespace Shopping.Migrations
 {
-    public partial class mig2 : Migration
+    public partial class mig3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

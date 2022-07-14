@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shopping.Models;
+using System.Linq;
 
 namespace Shopping.Controllers
 {
@@ -12,8 +13,9 @@ namespace Shopping.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_shopContext.Products.ToList());
         }
+
         
         public IActionResult createProduct()
         {
@@ -24,8 +26,7 @@ namespace Shopping.Controllers
         {
             if(p == null)
             {
-                return NotFound();
-                return RedirectToAction("createProduct");
+                return NotFound(); 
             }
             else
             {
