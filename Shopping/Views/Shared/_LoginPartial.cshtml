@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Http
+@*@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager*@
+@inject IHttpContextAccessor HttpContextAccessor
+<div class="navbar-nav">
+  @{
+        ViewBag.Username =@HttpContextAccessor.HttpContext.Session.GetString("Username");
+    }
+@if (ViewBag.Username!=null)
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-controller="Home" asp-action="Privacy" title="Manage">Hello @ViewBag.Username!</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" >
+            <button id="logout" type="submit" class="nav-link btn btn-link text-dark" asp-controller="SellerLogin" asp-action="Logout">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+ <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Login
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="Login/login">Seller Login</a>
+    <a class="dropdown-item" href="Login/Customerlogin">Customer Login</a>
+
+  @*  <a class="dropdown-item" href="#">Something else here</a>*@
+  </div>
+   </div>
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Register
+  </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="Login/Register">Seller Register</a>
+            <a class="dropdown-item" href="Login/CustomerRegister">Customer Register</a>
+    </div>
+    </div>
+    
+}
+</div> 
