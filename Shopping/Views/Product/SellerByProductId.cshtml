@@ -1,0 +1,32 @@
+﻿@model Shopping.Models.Seller
+
+@{
+    ViewData["Title"] = "SellerByProductId";
+}
+
+<h1>Seller Information</h1>
+
+<div>
+    <h4>Seller</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Seller_name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Seller_name)
+        </dd>
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.phoneNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.phoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    
+    <a asp-action="SellerOtherProducts" asp-route-id="@Model.Seller_id">Seller Other Products</a>
+    <a asp-action="Index">Back to Products</a>
+</div>

@@ -2,15 +2,16 @@
 
 @{
     ViewData["Title"] = "createProduct";
+    Layout = "MyLayout";
 }
 
-<h1>createProduct</h1>
+<h1>Create a Product and Ready to Provide Products</h1>
 
-<h4>Product</h4>
+<h4>Product Entry</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="createProduct">
+        <form asp-action="createProduct" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                
@@ -38,19 +39,26 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                
-                <input asp-for="Pimage" class="form-control" placeholder="Browse the image"/>
-                <span asp-validation-for="Pimage" class="text-danger"></span>
+                     <label asp-for="Pimage" class="control-label"></label>
+                     <input asp-for="Pimage" class="form-control" />
+                     <span asp-validation-for="Pimage" class="text-danger"></span>
+
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-secondary" />
+                <select asp-for="Seller_id" class ="form-control" asp-items="ViewBag.Seller_id" placeholder="Select Seller"></select>
+                
+             
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create Product" class="btn btn-secondary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to Product List</a>
+   <button> <a asp-action="Index">Back </a> </button>
 </div>
 
 @section Scripts {

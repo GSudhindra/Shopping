@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Shopping.Models.Product>
+
+@{
+
+    ViewData["Title"] = "SearchResult";
+    Layout = "MyLayout";
+}
+
+<h1>SearchResult</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+               @* @Html.DisplayNameFor(model => model.Pimage)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product_description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+              @*  @Html.DisplayFor(modelItem => item.Pimage)*@
+            </td>
+            <td>
+                
+                <a asp-action="Direction" asp-route-id="@item.Product_id"><i class="fa-solid fa-square-right">Direction</i></a> |
+                <a asp-action="SearchProduct" >Back to Search</a> |
+                <a asp-action="Index" asp-route-id="@item.Product_id">Back to Product List</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

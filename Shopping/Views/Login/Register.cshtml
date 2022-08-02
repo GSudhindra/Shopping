@@ -1,9 +1,117 @@
 ﻿@model Shopping.Models.Seller
 
+
+
+
 @{
     ViewData["Title"] = "Register";
+    Layout = "SellerLayout";
 }
+<section class="vh-10" style="background-color: #eee;">
+  <div class="container h-10">
+    <div class="row d-flex justify-content-center align-items-center h-10">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px;">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form asp-action="Register" class="mx-1 mx-md-4">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      @*<input type="text" id="form3Example1c" class="form-control" />*@
+                      <input asp-for="Seller_id" type="text" id="form3Example1c" class="form-control" />
+                      <span asp-validation-for="Seller_id" class="text-danger"></span>
+                      <label class="form-label" for="form3Example1c">Seller ID</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      @*<input type="email" id="form3Example3c" class="form-control" />*@
+                       <input asp-for="Seller_name" type="text" id="form3Example3c" class="form-control" />
+                        <span asp-validation-for="Seller_name" class="text-danger"></span>
+                      <label class="form-label" for="form3Example3c">Seller Name</label>
+                    </div>
+                  </div>
+                        <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+               
+                        <input asp-for="age" class="form-control"  id="form3Example3c" placeholder="Age(should be in 10 - 100)"/>
+                        <span asp-validation-for="age" class="text-danger"></span>
+                     <label class="form-label" for="form3Example3c">Age</label>
+                    </div>
+                  </div>
+                   <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+               
+                        <input asp-for="phoneNumber" type="number" id="form3Example3ca" class="form-control" placeholder="Phone Number(10 Numbers)"/>
+                        <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                     <label class="form-label" for="form3Example3ca">Phone Number</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      @*<input type="password" id="form3Example4c" class="form-control" />*@
+                      <input asp-for="Password" type="password" id="form3Example4c" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                      <label class="form-label" for="form3Example4c">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      @*<input type="password" id="form3Example4cd" class="form-control" />*@
+                       <input asp-for="CPassword" type="password" id="form3Example4cd" class="form-control" />
+                         <span asp-validation-for="CPassword" class="text-danger"></span>
+                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                    </div>
+                  </div>
+
+
+                  <div class="form-check d-flex justify-content-center mb-5">
+                    @*<input class="form-check-input me-2" type="checkbox" asp-route-id="True" value="" id="form2Example3" />*@
+                    <label class="form-check-label" for="form2Example3">
+                      I agree all statements in Terms of service. By submit this form, you are consent to our rules and regulations
+                    </label>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" value="Register" class="btn btn-primary btn-lg">Register</button>
+                  </div>
+
+                </form>
+                    <div>
+                        <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/Login/login"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+                    </div>
+              </div>
+              <div class="col-md-10 col-md-6 col-lg-7 d-flex align-items-center order-1 order-lg-2">
+
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+@*
 <h1>Register</h1>
 
 <h4>Seller</h4>
@@ -12,8 +120,7 @@
     <div class="col-md-4">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-               
+            <div class="form-group">
                 <input asp-for="Seller_id" class="form-control" placeholder="Seller ID"/>
                 <span asp-validation-for="Seller_id" class="text-danger"></span>
             </div>
@@ -24,12 +131,12 @@
             </div>
             <div class="form-group">
               
-                <input asp-for="Password" class="form-control" placeholder="Password"/>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password"/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                
-                <input asp-for="CPassword" class="form-control" placeholder="CPassword"/>
+                <input asp-for="CPassword" type="password" class="form-control" placeholder="CPassword"/>
                 <span asp-validation-for="CPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,16 +149,13 @@
                 <input asp-for="phoneNumber" class="form-control" placeholder="Phone Number(10 Numbers)"/>
                 <span asp-validation-for="phoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group align-self-xl-center">
+                <input type="submit" value="Register" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
+</div>*@
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

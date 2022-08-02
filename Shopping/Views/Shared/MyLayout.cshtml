@@ -1,35 +1,56 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Shopping</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/MyStyleSheet1.css" />
+    <link rel="stylesheet" href="~/css/mystylesheet2.css" />
+    <script src="https://kit.fontawesome.com/7d64766b1e.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Shopping</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Your Profile</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link text-dark" asp-area="" asp-controller="Sellers" asp-action="Index"></a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
+       
+           <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+          <div class="container-fluid">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Ivan Yaaro</a>
+             <a class="navbar-brand text-success logo h1 align-self-center" href="~/css/horizontal_on_white_by_logaster.png">
+             <img src="~/css/horizontal_on_white_by_logaster.png" height="50" width="100"/>
+            </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active"  asp-controller="Home" asp-action="Index">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" asp-controller="Sellers" asp-action="Index" onclick="mainController.pleaseWait()">Sellers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  asp-controller="Customers" asp-action="Index" onclick="mainController.pleaseWait()">Customers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  asp-controller="Product" asp-action="Index" onclick="mainController.pleaseWait()">Products</a>
+        </li>
+       
+     
+      </ul>
+     
+      <form class="d-flex">
+      
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit" asp-controller="Product" asp-action="SearchProduct" onclick="mainController.pleaseWait();">Search</button>
+      </form>
+    </div>
+     <partial name="_LoginPartial" />
+  </div>
+</nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -37,11 +58,30 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
+    <footer class="border-top footer text-muted" >
+        <div class="container" style="background-color:lightgreen;">
             &copy; 2022 - Shopping - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                    <a class="text-light" href="https://fb.com/" target="_blank" rel="sponsored"><i class="fa-brands fa-facebook"></i></a>                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram bi-sm "></i></a>
+                    <a class="text-light" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter-square"></i></a>
+                    <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin"></i></a> 
+                    <a class="text-light" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram-square"></i></a>  
+                    
         </div>
     </footer>
+    <div class="container">
+    <div id="pleaseWait"
+         class="pleaseWaitMessage d-none">
+        <h4>
+            <span id="theWaitMessage">
+             Please wait while loading...
+            </span>
+        </h4>
+    </div>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

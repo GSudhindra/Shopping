@@ -1,0 +1,46 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Customer
+
+@{
+    var showButtons = (bool)ViewData["ShowButtons"];
+}
+<div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+          
+            <div class="card-header">
+                <h3 style="color:red; animation-name:revert">@Model.Customer_name</h3>
+            </div>
+            
+            <div>
+               <bold>I am <p style="color:orangered;">@Model.age</p></bold>
+            </div>
+            <div>
+                @{
+            if(Model.gender == "Male" || Model.gender == "male" || Model.gender=="M")
+            {
+                                <img class="card-img-top imageThumbnail" src="~/img/images Male.png" alt="Male"/>
+            }
+            else
+            {
+                                <img class="card-img-top imageThumbnail" src="~/img/female-profile-picture-drawing_csp14385991.webp" alt="Female"/>
+            }
+
+                   }
+            </div>
+            <div>
+                <a class="navbar-sm-brand text-light text-decoration-none" href="tel:@Model.phoneNumber">Call Me</a>
+            </div>
+    @if (showButtons)
+    {
+        <div class="card-footer text-brown-center m-4">
+            <a class="btn btn-primary" asp-action="OffersForSenior" asp-controller="Purchase" asp-route-id="@Model.age">Offer</a> |
+            <a class="btn btn-primary" asp-action="Edit" asp-controller="Customers" asp-route-id="@Model.Customer_id">Edit</a> |
+            <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model.Customer_id">Details</a> |
+            <a class="btn btn-secondary" asp-action="Delete" asp-route-id="@Model.Customer_id">Delete</a>
+        </div>
+    }
+</div>
+

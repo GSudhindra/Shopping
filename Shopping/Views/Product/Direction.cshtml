@@ -1,0 +1,28 @@
+﻿@model Shopping.Models.ProductMap
+
+@{
+    ViewData["Title"] = "Direction";
+    Layout = "MyLayout";
+}
+
+<h1>Direction</h1>
+
+<div>
+    <h1><strong>Map to Your Products</strong></h1>
+    <h3>Hey, Friend. You can get this product with this Tip Location Guide</h3>  
+    <div class="card" style="background-color:aqua; color:green" >
+
+
+            @Html.DisplayFor(model => model.PLocation)
+            @foreach (var l in ViewBag.List)
+            {
+              <h1>@l</h1>
+            }
+ 
+    </div>
+</div>
+<section>
+<div class="card-footer" style="color:darkred;">
+   <a asp-action="Index" asp-controller="Product">Go Back</a>
+</div>
+</section>

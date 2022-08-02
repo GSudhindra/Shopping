@@ -1,36 +1,57 @@
 ﻿@model Shopping.Models.Customer
-
 @{
     ViewData["Title"] = "Customerlogin";
 }
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Login With us and See our Products and Experience Goodness</h2>
+              @*<h2>Hey, You can avail @ViewBag.Offer percentage offer</h2>*@
+              <form asp-action="Customerlogin">
 
-<h1>Customerlogin</h1>
+                <div class="form-outline mb-4">
+                    <input asp-for="Customer_id"  type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                
+                  <label class="form-label" for="form3Example1cg">Customer ID</label>
+                </div>
 
-<h4>Customer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Customerlogin">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating mb-3">
-              <input asp-for="Customer_id"  class="form-control" id="floatingInput" placeholder="User ID">
-            
-            </div>
-           
-            <div class="form-floating">
-               
-                <input asp-for="Password" type="password" class="form-control" id="floatPassword" placeholder="Password"/>
+             
+                <div class="form-outline mb-4">
                  
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                  <input asp-for="Password" type="password" id="form3Example4cg" class="form-control form-control-lg"/>
+                 
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                </div>
 
-           
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-danger" />
+            
+            
+
+                <div class="d-flex justify-content-center">
+                  <button type="submit" value="Customerlogin"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Don't Have you an account? <a href="/Login/CustomerRegister"
+                    class="fw-bold text-body"><u>Register here</u></a></p>
+
+              </form>
+
             </div>
-        </form>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
+
+
+
 
 
 @section Scripts {

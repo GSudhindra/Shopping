@@ -5,23 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Shopping.DAL;
 using Shopping.Models;
 
 namespace Shopping.Controllers
 {
     public class CustomersController : Controller
     {
-        private readonly shopContext _context;
+        private readonly ICustomerRepo _customerRepo;
 
-        public CustomersController(shopContext context)
+        public CustomersController()
         {
-            _context = context;
+            _customerRepo=new CustomerRepo(new shopContext());
         }
 
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            return View(await _customerRepo.GetAllCustomers());
         }
 
         // GET: Customers/Details/5
@@ -32,8 +33,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Customer_id == id);
+            var customer = await _customerRepo.GetCustomer(id);
             if (customer == null)
             {
                 return NotFound();
@@ -49,19 +49,16 @@ namespace Shopping.Controllers
         }
 
         // POST: Customers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Customer_id,Customer_name,Password,CPassword,age,gender,phoneNumber")] Customer customer)
+        public async Task<IActionResult> Create([Bind("Customer_id,Customer_name,Password,age,gender,phoneNumber")] Customer customer)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
+
+                _customerRepo.AddCustomer(customer);
+                 await _customerRepo.Save();
+
+                return RedirectToAction("Index");
         }
 
         // GET: Customers/Edit/5
@@ -72,7 +69,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _customerRepo.GetCustomer(id);
             if (customer == null)
             {
                 return NotFound();
@@ -92,27 +89,11 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.Customer_id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(customer);
+          
+                    await _customerRepo.UpdateCustomer(customer);
+                    await _customerRepo.Save();
+           
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Delete/5
@@ -123,8 +104,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Customer_id == id);
+            var customer = await _customerRepo.GetCustomer(id);
             if (customer == null)
             {
                 return NotFound();
@@ -138,15 +118,17 @@ namespace Shopping.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
+           
+            _customerRepo.RemoveCustomer(id);
+           
+            await _customerRepo.Save();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(string id)
-        {
-            return _context.Customers.Any(e => e.Customer_id == id);
-        }
+        //private bool CustomerExists(string id)
+        //{
+        //    return _context.Customers.Any(e => e.Customer_id == id);
+        //}
+       
     }
 }

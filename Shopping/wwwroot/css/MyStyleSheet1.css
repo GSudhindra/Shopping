@@ -13,13 +13,13 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-    font-family: sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
 
 body {
-    margin: 0;
+    margin: 10px;
 }
 
 article,
@@ -35,7 +35,7 @@ menu,
 nav,
 section,
 summary {
-    display: block;
+    display: flow-root;
 }
 
 audio,
@@ -57,7 +57,7 @@ template {
 }
 
 a {
-    background-color: transparent;
+    background-color: greenyellow;
 }
 
     a:active,
@@ -87,7 +87,7 @@ h1 {
 
 mark {
     background: #ff0;
-    color: #000;
+    color: #9933cc;
 }
 
 small {
@@ -163,7 +163,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button;
-    cursor: pointer;
+    cursor: crosshair;
 }
 
     button[disabled],
@@ -2941,7 +2941,7 @@ th {
     }
 
     .table .table {
-        background-color: #060606;
+        background-color:greenyellow;
     }
 
 .table-condensed > thead > tr > th,

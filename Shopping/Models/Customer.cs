@@ -6,8 +6,10 @@ namespace Shopping.Models
     public class Customer
     {
         [Key]
+        [Display(Name = "Customer Id")]
         [Required(ErrorMessage = "Please enter user id *")]
         public string Customer_id { get; set; }
+        [Display(Name = "Customer Name")]
         public string Customer_name { get; set; }
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "please enter the valid Password")]
@@ -18,10 +20,12 @@ namespace Shopping.Models
         public string CPassword { get; set; }
         [Required(ErrorMessage = "please enter the valid age")]
         public int age { get; set; }
+        [Display(Name = "Profile Image")]
+        public string ProfileImage { get; set; }
         public string gender { get; set; }
         [Required(ErrorMessage = "please enter the valid phone number")]
         [DataType(DataType.PhoneNumber)]
         public string phoneNumber { get; set; }
-        public virtual Product Product_idNavigation { get; set; }
+        //public virtual Product Product_idNavigation { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Routing;
 
 namespace Shopping.Controllers
 {
@@ -66,15 +67,18 @@ namespace Shopping.Controllers
         [HttpPost]
         public IActionResult CustomerRegister(Customer u)
         {
+            ViewBag.age = u.age;
+            HttpContext.Session.SetInt32("age",u.age);
             db.Customers.Add(u);
             db.SaveChanges();
-            return RedirectToAction("login");
+            return RedirectToAction("Customerlogin");
         }
         public IActionResult Customerlogin()
         {
 
             return View();
         }
+
         [HttpPost]
         public IActionResult Customerlogin(Customer obj)
         {
@@ -82,11 +86,14 @@ namespace Shopping.Controllers
             if (result != null)
             {
                 HttpContext.Session.SetString("Username", result.Customer_name);
-                return RedirectToAction("Index", "Customers");
+                
 
             }
-            else
-                return View();
+            var routeValues = new RouteValueDictionary {
+            { "id", result.Customer_id }
+           
+            };
+            return RedirectToAction("Details", "Customers",routeValues);
         }
 
 

@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Shopping.Models.CartItem
+@{
+     ViewData["Title"] = "AddToCart";
+}
+<h1>Thank You for added this product into cart</h1>
+
+<div>
+    <h4>CartItem</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CartId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CartId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.products)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.products.Product_id)
+        </dd>
+    </dl>
+</div>
+
+<button class="success">
+<a asp-controller="CartItems" asp-action="Index">
+    See All Products in Your Cart
+</a>
+</button>

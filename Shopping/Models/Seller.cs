@@ -20,8 +20,9 @@ namespace Shopping.Models
         [Required(ErrorMessage = "please enter the valid age")]
         public int age { get; set; }
         [Required(ErrorMessage = "please enter the valid phone number")]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string phoneNumber { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> products { get; set; }
     }
 }

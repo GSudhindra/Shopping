@@ -1,0 +1,29 @@
+﻿@model Shopping.Models.ProductMap
+
+@{
+    ViewData["Title"] = "ProductLocationDetails";
+    Layout = "MyLayout";
+    //ProductMap p = new ProductMap();
+    //string[] locat=Model.PLocation.Split(',');
+
+}
+
+<h1>ProductLocationDetails</h1>
+
+<div>
+   @* <h4> @ViewBag.Location</h4>*@
+    
+    <hr />
+    <h1><strong>Map to Your Products</strong></h1>
+    <h3>Hey, Friend. You can get this product with this Tip Location Guide</h3>  
+    <div class="card" style="background-color:aqua; color:green" >
+
+
+            @Html.DisplayFor(model => model.PLocation)
+ 
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TrackId">Edit</a> |
+    <a asp-action="AllProductLocation"><strong>Back to Main Product List</strong> </a>
+</div>

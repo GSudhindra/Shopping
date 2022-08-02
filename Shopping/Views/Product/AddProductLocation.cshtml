@@ -1,0 +1,43 @@
+﻿@model Shopping.Models.ProductMap
+
+@{
+    ViewData["Title"] = "AddProductLocation";
+    Layout = "MyLayout";
+}
+
+<h1>AddProductLocation</h1>
+
+<h4>ProductMap</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddProductLocation">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TrackId" class="control-label"></label>
+                <input asp-for="TrackId" class="form-control" />
+                <span asp-validation-for="TrackId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PLocation" class="control-label"></label>
+                <input asp-for="PLocation" class="form-control" />
+                <span asp-validation-for="PLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product_id" class="control-label"></label>
+                <select asp-for="Product_id" class ="form-control" asp-items="ViewBag.Product_Id"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Map" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

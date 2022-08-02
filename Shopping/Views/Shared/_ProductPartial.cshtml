@@ -1,0 +1,38 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Product
+@{
+   var showDelete = (bool)ViewData["ShowDelete"];
+}
+ 
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%; " >
+                <div class="card-header">
+                    <h3 style="color:darkorange"  class="card-title" >@Model.Product_name</h3>
+                    </div>
+                    <h4 class="card-subtitle mb-2 text-muted">@Model.type</h4>
+                    <p class="card-text"> @Model.Product_description</p>
+                    <h3 style="color:orange">@Model.Price</h3>
+                   
+                    @{
+                        var photopath = @Model.ImageName ?? "Planet9_3840x2160.jpg";
+                    }
+                    <div class="card-img">
+                        <img src="~/Uploads/@photopath" alt="Product image" height="100" width="100"/>
+                    </div>
+     
+           
+                @*<button><a asp-controller="CartItems" asp-action="AddToCart" asp-route-id="@item.Product_id">Add To Cart</a></button> *@
+        <div class="container">
+            <div class="row">
+            <div class="col"> <a class="btn btn-primary" asp-action="Details" asp-controller="Product" asp-route-id="@Model.Product_id">Details</a> </div>
+                <div class="col"><a class="btn btn-primary" asp-action="Direction" asp-controller="Product" asp-route-id="@Model.Product_id">Direction</a></div>
+                <div class="col"><a class="btn btn-primary" asp-controller="Product" asp-action="SellerByProductId"  asp-route-id="@Model.Product_id">Seller</a> </div>
+                @if(showDelete)
+                {
+                    <div class="col"><a class="btn btn-outline-danger m-lg-1" asp-action="Delete" asp-route-id="@Model.Product_id">Delete</a></div>
+                }
+            </div>
+        </div>
+        </div>

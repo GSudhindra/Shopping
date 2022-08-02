@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+ 
+@*@{
+    ViewData["Title"] = "Index";
+}*@
+@*<html>
+    <body>
+        @foreach (var item in Model) {
+        
+            <div class="card" >
+              <div class="card-body">
+                <h4 class="card-title" >@Html.DisplayFor(modelItem => item.Product_name)</h4>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.type)</h6>
+                <p class="card-text"> @Html.DisplayFor(modelItem => item.Product_description)</p>
+                <h3>@Html.DisplayFor(modelItem => item.Price)</h3>
+                <a href="#" class="card-link"> @Html.DisplayFor(modelItem => item.Seller_idNavigation)</a>
+                 <p class="card-text">@Html.DisplayFor(modelItem=> item.)</p> 
+                
+                <button><a asp-controller="CartItems" asp-action="AddToCart" asp-route-id="@item.Product_id">Add To Cart</a></button> |
+                <button><a asp-action="Details" asp-route-id="@item.Product_id">Details</a></button> |
+                <button> <a asp-action="Direction" asp-route-id="@item.Product_id">Direction</a></button>
+                <button><a asp-controller="Product" asp-action="SellerByProductId"  asp-route-id="@item.Product_id">Find This Seller</a></button> 
+              </div>
+            </div>
+                }
+    </body>
+</html>*@
+
+@*@model ProductRepo*@
+
+@model Shopping.ViewModels.GeneralViewModel  
+@{
+    ViewBag.Title = "Index";
+    
+
+}  
+   
+<h2>List of Products and list of Customers together</h2>  
+   
+<h4>List of Products</h4>  
+<ul>  
+    @foreach (var book in Model.products)  
+    {  
+        <li>  
+            @book.Product_name;  
+        </li>  
+    }  
+</ul>  
+<p style="color:red;text-align:center;">@Model.TimeDisplay()</p>   
+<h4>List of Customers</h4>  
+<ul>  
+    @foreach (var customer in Model.customers)  
+    {  
+        <li>  
+            @customer.Customer_name;  
+        </li>  
+    }  
+</ul>  

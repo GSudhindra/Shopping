@@ -5,23 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Shopping.DAL;
 using Shopping.Models;
 
 namespace Shopping.Controllers
 {
     public class SellersController : Controller
     {
-        private readonly shopContext _context;
-
+       
+        private readonly ISellerRepo _sellerRepo;
         public SellersController(shopContext context)
         {
-            _context = context;
+            _sellerRepo=new SellerRepo(new shopContext());
         }
 
         // GET: Sellers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sellers.ToListAsync());
+            return View(await _sellerRepo.GetSellerList());
         }
 
         // GET: Sellers/Details/5
@@ -32,8 +33,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers
-                .FirstOrDefaultAsync(m => m.Seller_id == id);
+            var seller =await _sellerRepo.GetSellerById(id);
             if (seller == null)
             {
                 return NotFound();
@@ -55,12 +55,11 @@ namespace Shopping.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Seller_id,Seller_name,Password,age,phoneNumber")] Seller seller)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(seller);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+
+
+            await _sellerRepo.AddSeller(seller);
+            await _sellerRepo.Save();
+               
             return View(seller);
         }
 
@@ -72,7 +71,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers.FindAsync(id);
+            var seller = await _sellerRepo.GetSellerById(id);
             if (seller == null)
             {
                 return NotFound();
@@ -92,26 +91,10 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(seller);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SellerExists(seller.Seller_id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
+            
+                    await _sellerRepo.UpdateSeller(seller);
+                    await _sellerRepo.Save();
+              
             return View(seller);
         }
 
@@ -123,8 +106,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            var seller = await _context.Sellers
-                .FirstOrDefaultAsync(m => m.Seller_id == id);
+            var seller = await _sellerRepo.GetSellerById(id);
             if (seller == null)
             {
                 return NotFound();
@@ -138,15 +120,12 @@ namespace Shopping.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var seller = await _context.Sellers.FindAsync(id);
-            _context.Sellers.Remove(seller);
-            await _context.SaveChangesAsync();
+            
+            await _sellerRepo.DeleteSeller(id);
+            await _sellerRepo.Save();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SellerExists(string id)
-        {
-            return _context.Sellers.Any(e => e.Seller_id == id);
-        }
+        
     }
 }
