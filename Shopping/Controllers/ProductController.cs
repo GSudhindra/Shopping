@@ -18,13 +18,14 @@ namespace Shopping.Controllers
 {
     public class ProductController : Controller
     {
-        
+        private readonly shopContext _shopContext;
         public IProductRepo _productRepo { get; set; }
         private ISellerRepo _sellerRepo { get; set; }
         private IProductMapRepo _productMapRepo { get; set; } 
         private IWebHostEnvironment _env;
-        public ProductController( IWebHostEnvironment env)
+        public ProductController(shopContext db, IWebHostEnvironment env)
         {
+            _shopContext = db;
             _productRepo = new ProductRepo(new shopContext());
             _sellerRepo = new SellerRepo(new shopContext());
             _productMapRepo = new ProductMapRepo(new shopContext());
@@ -44,8 +45,9 @@ namespace Shopping.Controllers
         #region product crud operations
         public async Task<IActionResult> Index()
         {
-            
-            return View(await _productRepo.GetProductList());
+         //Here, I use normal method to list the products instead of Repo.
+            return View(await _shopContext.Products.ToListAsync());
+            //return View(await _productRepo.GetProductList());
         }
         // GET: Product/Details/5
         public async Task<IActionResult> Details(string id)
